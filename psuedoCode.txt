@@ -1,0 +1,24 @@
+create a react app
+
+one html page with
+ - fixed header
+  - Current score 
+  - Top score
+ - Header w/Title
+ Header - 4 components - Game Name User Message, Current Score, Top Score
+ 
+ - 12 images in a grid
+ create with 1 card component
+
+- image is clickable
+- ON Click
+    - show message "You guessed correctly."
+    - randomize position of all images
+    - remember which image is clicked.
+    - add 1 point to current score when image is clicked the first time
+    - if an image is clicked more than once, reset Current Score and show a message "you guessed incorrectly"
+        -- Else show message you guessed correctly and note the image that was clicked and add 1 point to Current Score.
+     -- If current score is higher than Top Score, then save it as the new Top score
+
+- footer (static)
+
