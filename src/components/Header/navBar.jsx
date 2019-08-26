@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 //import Score from "./components/score";
 //import TopScore from "./components/topScore";
+import "./navBar.css";
 
 class Nav extends Component {
-  styles = {
-    backgroundColor: "#563d7c",
-    color: "white",
-    fontSize: 22
-  };
-
   render() {
     return (
       <div className="container">
-        <nav style={this.styles} className="navbar">
+        <nav className="navbar myNavBar">
           <nav-item
             style={
               this.styles && {

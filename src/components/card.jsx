@@ -9,7 +9,7 @@ class Card extends Component {
     return (
       <div>
         {this.state.cardInfo.map(card => (
-          <cardInfo />
+          <Card />
         ))}
       </div>
     );
