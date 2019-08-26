@@ -11,9 +11,9 @@ class Nav extends Component {
 
   render() {
     return (
-      <div class="container">
+      <div className="container">
         <nav style={this.styles} className="navbar">
-          <a
+          <nav-item
             style={
               this.styles && {
                 fontSize: 28,
@@ -22,10 +22,9 @@ class Nav extends Component {
               }
             }
             className="navbar-brand"
-            href="#"
           >
             Get Clicky With It!
-          </a>
+          </nav-item>
           <nav-item>Click an image to start the game!</nav-item>
           <nav-item>Score: </nav-item>
           <nav-item>Top Score: </nav-item>
