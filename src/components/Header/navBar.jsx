@@ -8,21 +8,13 @@ class Nav extends Component {
     return (
       <div className="container">
         <nav className="navbar myNavBar">
-          <nav-item
-            style={
-              this.styles && {
-                fontSize: 28,
-                color: "white",
-                fontWeight: "bold"
-              }
-            }
-            className="navbar-brand"
-          >
-            Get Clicky With It!
-          </nav-item>
-          <nav-item>Click an image to start the game!</nav-item>
-          <nav-item>Score: </nav-item>
-          <nav-item>Top Score: </nav-item>
+          <ul className="nav">
+            <li className="nav-item navbar-brand myTitle">
+              <a href="/">Get Clicky With It!</a>
+            </li>
+            <li className="nav-item">Click an image to start the game!</li>
+            <li className="nav-item score">Score: 0 | Top Score: 0 </li>
+          </ul>
         </nav>
       </div>
     );

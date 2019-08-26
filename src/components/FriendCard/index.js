@@ -5,7 +5,7 @@ function FriendCard(props) {
   return (
     <div className="card">
       <div className="img-container">
-        <img alt={props.name} src={props.image} />
+        <img className="img-thumbnail" alt={props.name} src={props.image} />
       </div>
     </div>
   );

@@ -2,4 +2,23 @@
   background: #563d7c;
   color: white;
   font-size: 22;
+  height: 75px;
+}
+
+a {
+  font-size: 28px !important;
+  color: white !important;
+  font-weight: bold !important;
+  display: inline-block !important;
+  padding: 5px 70px 20px 20px !important;
+}
+
+.nav-item {
+  display: inline-block;
+  padding: 13px 0px 10px 0px;
+  font-size: 24px;
+}
+
+.score {
+  padding: 13px 0px 10px 60px !important;
 }
