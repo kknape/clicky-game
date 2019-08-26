@@ -1,16 +1,15 @@
 import React, { Component } from "react";
+import FriendCard from "./components/FriendCard";
 
 class Score extends Component {
   state = {
     count: 0
   };
-  render() {
-    return (
-      <div>
-        Score: <span>{this.state.count}</span>
-      </div>
-    );
-  }
-}
+  
+  this.setState(prevState => {
+    return { count: prevState.count + 1 };
+  });
+  
 
 export default Score;
+
