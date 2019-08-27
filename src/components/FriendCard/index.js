@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
 
 function FriendCard(props) {
+  //set state of card to false by default - "card has not been clicked"
+  const [isClicked, setClick] = useState(false);
+
+  //each card who's state changes to true, adds 1 to current score
+  const [count, setCount] = useState(0);
+
+  //a function to increment the count/score and set isClicked
+  const increment = () => {
+    setCount(count + 1);
+    setClick(true);
+  };
+
   return (
     <div className="card">
-      <div
-        /*onClick={() => props.clicked(props.id)} */ className="img-container"
-      >
+      <h1>
+        {count}
+        {isClicked}
+      </h1>
+      <div onClick={increment} className="img-container">
         <img className="img-thumbnail" alt={props.name} src={props.image} />
       </div>
     </div>
