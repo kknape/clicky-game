@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./style.css";
 
-function FriendCard(props) {
+function GameCard(props) {
   //set state of card to false by default - "card has not been clicked"
   let [isClicked, setClick] = useState(false);
 
@@ -12,8 +12,14 @@ function FriendCard(props) {
 
   //if (isClicked === false)
   const increment = () => {
+    //if (props.clicked === false) {
+    console.log(props);
     setCount(count + 1);
     setClick(true);
+    // }
+    // else {
+    //end of game, reset score to zero, check to see if it's a "top score", cards
+    // }
   };
 
   return (
@@ -29,4 +35,4 @@ function FriendCard(props) {
   );
 }
 
-export default FriendCard;
+export default GameCard;

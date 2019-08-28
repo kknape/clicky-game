@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-//import Score from "./components/score";
-//import TopScore from "./components/topScore";
 import "./navBar.css";
 
 class Nav extends Component {

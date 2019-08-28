@@ -1,4 +1,4 @@
 import React, { Component } from "react";
-import FriendCard from "./components/FriendCard";
+import GameCard from "./components/GameCard";
 
 export default Score;
