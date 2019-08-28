@@ -7,27 +7,28 @@ import GameCard from "./components/GameCard";
 import cardInfo from "./cardInfo.json";
 
 class App extends Component {
-  // Setting this.state.friends to the friends json array
+  // state with the cardInfo json array
   state = {
     cardInfo
   };
 
   handleIncrement = () => {
-    // We always use the setState method to update a component's state
+    // Use the setState method to update a component's state
     this.setState({ clicked: true });
   };
 
   //if (isClicked === false)
   increment = (isClicked, id) => {
     if (isClicked === false) {
-      console.log(isClicked);
+      console.log(this.state.cardInfo);
       console.log(id);
       let newCardInfo = this.state.cardInfo;
       newCardInfo[id].clicked = true;
-      console.log(newCardInfo);
-      //this.setState({ cardInfo:    });
+      this.setState({ cardInfo: [...newCardInfo] });
+      console.log(this.state.cardInfo);
     } else {
       //end of game, reset score to zero, check to see if it's a "top score", cards shake
+      console.log("you lose");
     }
   };
 
