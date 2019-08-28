@@ -9,8 +9,7 @@ import cardInfo from "./cardInfo.json";
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
-    cardInfo,
-    clicked: props.clicked
+    cardInfo
   };
 
   handleIncrement = () => {
@@ -19,12 +18,14 @@ class App extends Component {
   };
 
   //if (isClicked === false)
-  increment = isClicked => {
-    if (props.clicked === false) {
-      setCount(count + 1);
-      setClick(true);
-      this.setState({ clicked: true });
-      console.log(props);
+  increment = (isClicked, id) => {
+    if (isClicked === false) {
+      console.log(isClicked);
+      console.log(id);
+      let newCardInfo = this.state.cardInfo;
+      newCardInfo[id].clicked = true;
+      console.log(newCardInfo);
+      //this.setState({ cardInfo:    });
     } else {
       //end of game, reset score to zero, check to see if it's a "top score", cards shake
     }
@@ -37,10 +38,11 @@ class App extends Component {
         <Nav />
         {this.state.cardInfo.map(cardInfo => (
           <GameCard
+            clicked={this.increment}
             id={cardInfo.id}
             key={cardInfo.id}
             image={cardInfo.image}
-            clicked={increment}
+            isClicked={cardInfo.clicked}
           />
         ))}
       </Wrapper>

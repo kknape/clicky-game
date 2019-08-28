@@ -3,7 +3,7 @@ import "./style.css";
 
 function GameCard(props) {
   //set state of card to false by default - "card has not been clicked"
-  let [isClicked, setClick] = useState(false);
+  let [isClicked, setClick, id] = useState(false);
 
   //each card who's state changes to true, adds 1 to current score
   const [count, setCount] = useState(0);
@@ -28,7 +28,12 @@ function GameCard(props) {
         {count}
         {isClicked}
       </h1>
-      <div onClick={increment} className="img-container">
+      <div
+        onClick={() => {
+          props.clicked(isClicked, props.id);
+        }}
+        className="img-container"
+      >
         <img className="img-thumbnail" alt={props.name} src={props.image} />
       </div>
     </div>
