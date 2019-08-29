@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     cardInfo,
     score: 0,
-    topScore: 0
+    topScore: 0,
+    userMsg: "Click an image to start the game!"
   };
 
   handleIncrement = () => {
@@ -27,7 +28,8 @@ class App extends Component {
       this.setState({
         cardInfo: [...newCardReset],
         score: 0,
-        topScore: this.state.topScore
+        topScore: this.state.topScore,
+        userMsg: "You guessed incorrectly."
       });
     }
   };
@@ -43,12 +45,18 @@ class App extends Component {
       this.setState({ cardInfo: [...newCardInfo] });
       console.log(this.state.cardInfo);
 
+      //show user message, "That's correct!"
+      let corUserMsg = this.state.userMsg;
+      corUserMsg = "You guessed correctly.";
+      this.setState({ userMsg: corUserMsg });
+      console.log(this.state.userMsg);
+
       //add one point to the score
       let newScore = this.state.score + 1;
       this.setState({ score: newScore });
       console.log(this.state.score);
 
-      //add to Top score
+      //add to Top score if it's higher than the current score
       if (newScore >= this.state.topScore) {
         this.setState({ topScore: newScore });
       }
@@ -70,7 +78,11 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Nav score={this.state.score} topScore={this.state.topScore} />
+        <Nav
+          userMsg={this.state.userMsg}
+          score={this.state.score}
+          topScore={this.state.topScore}
+        />
         {this.state.cardInfo.map(cardInfo => (
           <GameCard
             clicked={this.increment}

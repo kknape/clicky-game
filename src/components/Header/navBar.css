@@ -22,3 +22,9 @@ a {
 .score {
   padding: 13px 0px 10px 60px !important;
 }
+
+.userMsg {
+  font-size: 20px;
+  width: 400px;
+  text-align: center;
+}

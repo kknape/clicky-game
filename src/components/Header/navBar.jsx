@@ -9,7 +9,7 @@ function Nav(props) {
           <li className="nav-item navbar-brand myTitle">
             <a href="/">Get Clicky With It!</a>
           </li>
-          <li className="nav-item">Click an image to start the game!</li>
+          <li className="nav-item userMsg">{props.userMsg}</li>
           <li className="nav-item score">
             Score: {props.score} | Top Score: {props.topScore}
           </li>

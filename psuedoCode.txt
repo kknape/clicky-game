@@ -1,12 +1,13 @@
 create a react app
 
-one html page with
+one html page
 Header - component:
-Game Name User Message, Current Score, Top Score
+Game Name, User Message, Current Score, Top Score
 
 Card json with card data: unique ID, image, Clicked-true/false 
 
 12 images in a grid
+
 create with a card component
 
 - ON Click of image
