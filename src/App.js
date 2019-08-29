@@ -7,9 +7,11 @@ import GameCard from "./components/GameCard";
 import cardInfo from "./cardInfo.json";
 
 class App extends Component {
-  // state with the cardInfo json array
+  // state with the cardInfo json array, score, top score
   state = {
-    cardInfo
+    cardInfo,
+    score: 0,
+    topScore: 0
   };
 
   handleIncrement = () => {
@@ -17,26 +19,58 @@ class App extends Component {
     this.setState({ clicked: true });
   };
 
-  //if (isClicked === false)
+  gameReset = () => {
+    for (var i = 0; i < cardInfo.length; i++) {
+      let newCardReset = this.state.cardInfo;
+      newCardReset[i].clicked = false;
+
+      this.setState({
+        cardInfo: [...newCardReset],
+        score: 0,
+        topScore: this.state.topScore
+      });
+    }
+  };
+
+  //if a given card has a 'clicked' state of false, then change it's state to true
   increment = (isClicked, id) => {
     if (isClicked === false) {
       console.log(this.state.cardInfo);
       console.log(id);
+
       let newCardInfo = this.state.cardInfo;
       newCardInfo[id].clicked = true;
       this.setState({ cardInfo: [...newCardInfo] });
       console.log(this.state.cardInfo);
-    } else {
-      //end of game, reset score to zero, check to see if it's a "top score", cards shake
-      console.log("you lose");
+
+      //add one point to the score
+      let newScore = this.state.score + 1;
+      this.setState({ score: newScore });
+      console.log(this.state.score);
+
+      //add to Top score
+      if (newScore >= this.state.topScore) {
+        this.setState({ topScore: newScore });
+      }
+    }
+    //
+    else {
+      //game over
+      this.gameReset();
+      console.log("You lose.");
+      console.log(this.state.cardInfo);
+      //   //  this.setState({ rightWrong: "You win!" });
+      //   //end of game, reset score to zero, check to see if it's a "top score", cards shake
     }
   };
 
+  //Show score
   // Map over this.state.friends and render a GameCard component for each friend object
+  //run Game Card component, captures click of a given card, sets state to True.
   render() {
     return (
       <Wrapper>
-        <Nav />
+        <Nav score={this.state.score} topScore={this.state.topScore} />
         {this.state.cardInfo.map(cardInfo => (
           <GameCard
             clicked={this.increment}
