@@ -5,6 +5,7 @@ import "./App.css";
 //import Score from "./components/score";
 import GameCard from "./components/GameCard";
 import cardInfo from "./cardInfo.json";
+import { Animated } from "react-animated-css";
 
 class App extends Component {
   // state with the cardInfo json array, score, top score
@@ -20,6 +21,7 @@ class App extends Component {
     this.setState({ clicked: true });
   };
 
+  //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
   gameReset = () => {
     for (var i = 0; i < cardInfo.length; i++) {
       let newCardReset = this.state.cardInfo;
@@ -37,12 +39,14 @@ class App extends Component {
   //if a given card has a 'clicked' state of false, then change it's state to true
   increment = (isClicked, id) => {
     if (isClicked === false) {
+      //for debugging
       console.log(this.state.cardInfo);
       console.log(id);
 
       let newCardInfo = this.state.cardInfo;
       newCardInfo[id].clicked = true;
       this.setState({ cardInfo: [...newCardInfo] });
+      //for debugging
       console.log(this.state.cardInfo);
 
       //show user message, "That's correct!"
@@ -56,6 +60,12 @@ class App extends Component {
       this.setState({ score: newScore });
       console.log(this.state.score);
 
+      //shuffle the cards
+      cardInfo.sort(function(a, b) {
+        return 0.5 - Math.random();
+      });
+      this.setState({ cardInfo });
+
       //add to Top score if it's higher than the current score
       if (newScore >= this.state.topScore) {
         this.setState({ topScore: newScore });
@@ -63,12 +73,14 @@ class App extends Component {
     }
     //
     else {
-      //game over
+      //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
       this.gameReset();
+
+      //use for debugging
       console.log("You lose.");
       console.log(this.state.cardInfo);
       //   //  this.setState({ rightWrong: "You win!" });
-      //   //end of game, reset score to zero, check to see if it's a "top score", cards shake
+      //   //end of game,
     }
   };
 
