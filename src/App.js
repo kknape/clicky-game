@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import Wrapper from "./components/Wrapper";
 import Nav from "./components/Header/navBar";
 import "./App.css";
-//import Score from "./components/score";
 import GameCard from "./components/GameCard";
 import cardInfo from "./cardInfo.json";
-import { Animated } from "react-animated-css";
 
 class App extends Component {
   // state with the cardInfo json array, score, top score
@@ -13,7 +11,8 @@ class App extends Component {
     cardInfo,
     score: 0,
     topScore: 0,
-    userMsg: "Click an image to start the game!"
+    userMsg: "Click an image to start the game!",
+    shake: false
   };
 
   handleIncrement = () => {
@@ -31,9 +30,17 @@ class App extends Component {
         cardInfo: [...newCardReset],
         score: 0,
         topScore: this.state.topScore,
-        userMsg: "You guessed incorrectly."
+        userMsg: "You guessed incorrectly.",
+        shake: true
       });
+      console.log(this);
     }
+
+    //shuffle the cards
+    cardInfo.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+    this.setState({ cardInfo });
   };
 
   //if a given card has a 'clicked' state of false, then change it's state to true
@@ -60,6 +67,9 @@ class App extends Component {
       this.setState({ score: newScore });
       console.log(this.state.score);
 
+      //set shake to false
+      this.setState({ shake: false });
+
       //shuffle the cards
       cardInfo.sort(function(a, b) {
         return 0.5 - Math.random();
@@ -75,12 +85,9 @@ class App extends Component {
     else {
       //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
       this.gameReset();
-
       //use for debugging
       console.log("You lose.");
-      console.log(this.state.cardInfo);
-      //   //  this.setState({ rightWrong: "You win!" });
-      //   //end of game,
+      console.log(this.state.shake);
     }
   };
 
@@ -102,6 +109,7 @@ class App extends Component {
             key={cardInfo.id}
             image={cardInfo.image}
             isClicked={cardInfo.clicked}
+            shake={this.state.shake}
           />
         ))}
       </Wrapper>
