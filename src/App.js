@@ -1,12 +1,13 @@
+//Main game logic
+
 import React, { Component } from "react";
 import Wrapper from "./components/Wrapper";
 import Nav from "./components/Header/navBar";
-import "./App.css";
 import GameCard from "./components/GameCard";
 import cardInfo from "./cardInfo.json";
 
 class App extends Component {
-  // state with the cardInfo json array, score, top score
+  // state with the cardInfo json array, score, top score, user message and 'shake' state
   state = {
     cardInfo,
     score: 0,
@@ -20,7 +21,7 @@ class App extends Component {
     this.setState({ clicked: true });
   };
 
-  //if you guess all correctly
+  //if you guess all cards correctly, give user a Win message and reset the game
   gameWin = () => {
     let newCardReset = this.state.cardInfo.map(card => {
       card.clicked = false;
@@ -30,12 +31,18 @@ class App extends Component {
       cardInfo: [...newCardReset],
       score: 0,
       topScore: 0,
-      userMsg: "You won!",
+      userMsg: "You won! Click to play again.",
       shake: false
     });
   };
 
-  //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
+  //if you guess incorrectly, the game is over
+  //reset clicked value to false
+  //reset shake value to false
+  //reset score to zero
+  //check to see if it's a "top score", if yes, update Top Score with the new score
+  //apply shake effect
+  //shuffle cards
   gameReset = () => {
     // reset all card "clicked" properties to false
     let newCardReset = this.state.cardInfo.map(card => {
@@ -48,12 +55,12 @@ class App extends Component {
         cardInfo: [...newCardReset],
         score: 0,
         topScore: this.state.topScore,
-        userMsg: "You guessed incorrectly.",
+        userMsg: "Incorrect Guess. Game Over.",
         shake: true
       },
       () => {
-        console.log("reset", this.state);
         // see latest state changes in console
+        console.log("reset", this.state);
       }
     );
 
@@ -63,7 +70,13 @@ class App extends Component {
     });
   };
 
-  //if a given card has a 'clicked' state of false, then change it's state to true
+  //if you guess correctly (picking a card that has not yet been picked)
+  //change clicked state to true
+  //shuffle the cards
+  //add one point to the score
+  //show user message, "That's correct!"
+  //shake set to false
+
   increment = (isClicked, id) => {
     console.log("entering increment function ", isClicked, id);
     if (isClicked === false) {
@@ -88,16 +101,17 @@ class App extends Component {
       this.setState(
         {
           cardInfo: [...newCardInfo],
-          userMsg: "You guessed correctly.",
+          userMsg: "Correct guess!",
           score: newScore,
           shake: false
         },
         () => {
-          console.log("guessed correctly", this.state);
           // see latest state changes in console
+          console.log("guessed correctly", this.state);
         }
       );
 
+      //if all cards guessed correctly, run gameWin function
       if (newScore === cardInfo.length) {
         this.gameWin();
       }
@@ -107,16 +121,22 @@ class App extends Component {
         this.setState({ topScore: newScore });
       }
     }
-    //if user guesses incorrectly
+    //if user guesses incorrectly, run gameReset function
     else {
-      //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
       this.gameReset();
     }
   };
 
-  //Show score
-  // Map over this.state.friends and render a GameCard component for each friend object
-  //run Game Card component, captures click of a given card, sets state to True.
+  //Render will...
+  //Run Wrapper component
+  //Run Nav component
+  //dynamically shows the User Message, Score and Top Score based on game play
+  // Map over this.state.friends and render the GameCard component for each friend object
+  //Running the Game Card component...
+  //Shows the card
+  //Captures the click of a given card
+  //Sets state to True
+  //Applies shake class if shake state equals true.
   render() {
     return (
       <Wrapper>
@@ -125,7 +145,6 @@ class App extends Component {
           score={this.state.score}
           topScore={this.state.topScore}
         />
-
         {this.state.cardInfo.map((cardInfo, index) => (
           <GameCard
             clicked={this.increment}
@@ -140,5 +159,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
