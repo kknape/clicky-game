@@ -20,6 +20,21 @@ class App extends Component {
     this.setState({ clicked: true });
   };
 
+  //if you guess all correctly
+  gameWin = () => {
+    let newCardReset = this.state.cardInfo.map(card => {
+      card.clicked = false;
+      return card;
+    });
+    this.setState({
+      cardInfo: [...newCardReset],
+      score: 0,
+      topScore: 0,
+      userMsg: "You won!",
+      shake: false
+    });
+  };
+
   //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
   gameReset = () => {
     // reset all card "clicked" properties to false
@@ -83,11 +98,17 @@ class App extends Component {
         }
       );
 
-      //add one point to the score
-      if (newScore >= this.state.topScore) {
+      if (newScore === cardInfo.length) {
+        this.gameWin();
+      }
+
+      //if user guesses correctly add one point to the score
+      else if (newScore >= this.state.topScore) {
         this.setState({ topScore: newScore });
       }
-    } else {
+    }
+    //if user guesses incorrectly
+    else {
       //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
       this.gameReset();
     }
