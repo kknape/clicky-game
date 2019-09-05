@@ -3,18 +3,22 @@ import "./navBar.css";
 
 function Nav(props) {
   return (
-    <div className="container">
-      <nav className="navbar myNavBar">
-        <ul className="nav">
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-sm navbar myNavBar">
           <li className="nav-item navbar-brand myTitle">
             <a href="/">Get Clicky With It!</a>
           </li>
+        </div>
+        <div className="col-sm navbar myNavBar">
           <li className="nav-item userMsg">{props.userMsg}</li>
+        </div>
+        <div className="col-sm navbar myNavBar">
           <li className="nav-item score">
             Score: {props.score} | Top Score: {props.topScore}
           </li>
-        </ul>
-      </nav>
+        </div>
+      </div>
     </div>
   );
 }
