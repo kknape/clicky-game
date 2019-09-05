@@ -6,8 +6,9 @@ function GameCard(props) {
     <div className="card">
       <div
         onClick={() => props.clicked(props.isClicked, props.id)}
-        className={"img-container" + (props.shake ? " shake" : "")}
+        className={"img-container" + (props.shake ? "shake" : "")}
       >
+        <div></div>
         <img className="img-thumbnail" alt={props.name} src={props.image} />
       </div>
     </div>

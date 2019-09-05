@@ -22,72 +22,74 @@ class App extends Component {
 
   //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
   gameReset = () => {
-    for (var i = 0; i < cardInfo.length; i++) {
-      let newCardReset = this.state.cardInfo;
-      newCardReset[i].clicked = false;
+    // reset all card "clicked" properties to false
+    let newCardReset = this.state.cardInfo.map(card => {
+      card.clicked = false;
+      return card;
+    });
 
-      this.setState({
+    this.setState(
+      {
         cardInfo: [...newCardReset],
         score: 0,
         topScore: this.state.topScore,
         userMsg: "You guessed incorrectly.",
         shake: true
-      });
-      console.log(this);
-    }
+      },
+      () => {
+        console.log("reset", this.state);
+        // see latest state changes in console
+      }
+    );
 
     //shuffle the cards
-    cardInfo.sort(function(a, b) {
+    newCardReset.sort(function(a, b) {
       return 0.5 - Math.random();
     });
-    this.setState({ cardInfo });
   };
 
   //if a given card has a 'clicked' state of false, then change it's state to true
   increment = (isClicked, id) => {
+    console.log("entering increment function ", isClicked, id);
     if (isClicked === false) {
-      //for debugging
-      console.log(this.state.cardInfo);
-      console.log(id);
-
+      // update element in card array with "clicked property as true"
       let newCardInfo = this.state.cardInfo;
       newCardInfo[id].clicked = true;
-      this.setState({ cardInfo: [...newCardInfo] });
-      //for debugging
-      console.log(this.state.cardInfo);
 
-      //show user message, "That's correct!"
-      let corUserMsg = this.state.userMsg;
-      corUserMsg = "You guessed correctly.";
-      this.setState({ userMsg: corUserMsg });
-      console.log(this.state.userMsg);
+      // resort entire array of cards
+      newCardInfo.sort(function(a, b) {
+        return 0.5 - Math.random();
+      });
 
       //add one point to the score
       let newScore = this.state.score + 1;
-      this.setState({ score: newScore });
-      console.log(this.state.score);
 
-      //set shake to false
-      this.setState({ shake: false });
+      // update react state
+      // 1) sorted newCardInfo with item clicked as true
+      // 2) show user message, "That's correct!"
+      // 3) score with addition of 1 point
+      // 4) shake set to false
 
-      //shuffle the cards
-      cardInfo.sort(function(a, b) {
-        return 0.5 - Math.random();
-      });
-      this.setState({ cardInfo });
+      this.setState(
+        {
+          cardInfo: [...newCardInfo],
+          userMsg: "You guessed correctly.",
+          score: newScore,
+          shake: false
+        },
+        () => {
+          console.log("guessed correctly", this.state);
+          // see latest state changes in console
+        }
+      );
 
-      //add to Top score if it's higher than the current score
+      //add one point to the score
       if (newScore >= this.state.topScore) {
         this.setState({ topScore: newScore });
       }
-    }
-    //
-    else {
+    } else {
       //game over: reset score to zero, check to see if it's a "top score", cards shake, cards shuffle
       this.gameReset();
-      //use for debugging
-      console.log("You lose.");
-      console.log(this.state.shake);
     }
   };
 
@@ -102,11 +104,12 @@ class App extends Component {
           score={this.state.score}
           topScore={this.state.topScore}
         />
-        {this.state.cardInfo.map(cardInfo => (
+
+        {this.state.cardInfo.map((cardInfo, index) => (
           <GameCard
             clicked={this.increment}
-            id={cardInfo.id}
-            key={cardInfo.id}
+            id={index}
+            key={index}
             image={cardInfo.image}
             isClicked={cardInfo.clicked}
             shake={this.state.shake}

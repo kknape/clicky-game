@@ -4,17 +4,17 @@ one html page
 Header - component:
 Game Name, User Message, Current Score, Top Score
 
-Card json with card data: unique ID, image, Clicked-true/false 
+Card json with card data: unique ID, image, Clicked-true/false , user message-text string
 
 12 images in a grid
 
-create with a card component
+create a card component
 
 - ON Click of image
 if image has not been clicked,
-    - show message "You guessed correctly."
-    - randomize position of all images
-    - remember which image is clicked.
+    - show message "You guessed correctly." - change user message
+    - randomize position of all images - shuffle cards
+    - remember which image is clicked - set isClicked to True
     - add 1 point to current score 
 else reset Current Score and show a message "you guessed incorrectly"
   -- If current score is higher than Top Score, then save it as the new Top score
