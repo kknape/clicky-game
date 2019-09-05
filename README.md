@@ -22,7 +22,7 @@ The Clicky Game app is a simple memory game where the user tries to click each i
 
 ##How to Use the App
  - Home page is displayed. Click an image to get started.
-   - ![User Selects Prompt](https://kknape.github.io/clicky-game/images/Start_Game.png)
+   - ![User Selects Prompt](https://kknape.github.io/clicky-game/images/Guess_correct.png)
  - When you guess correctly and click an image that has not yet been clicked, you get a point and the cards shuffle.
     - ![User Selects Prompt](https://kknape.github.io/clicky-game/images/Guess_correct.png)
  - When you guess incorrectly by clicking an image twice, the cards shake and shuffle and the score resets to zero. Click an image to try again. The Top Score will update if your score surpasses the current Top Score.
