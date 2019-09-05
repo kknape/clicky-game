@@ -19,6 +19,7 @@
   width: 100%;
 }
 
+/*card shake effect using CSS*/
 .shake {
   animation: shake 0.5s;
   animation-iteration-count: 3s;
