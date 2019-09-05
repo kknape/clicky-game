@@ -50,6 +50,11 @@ class App extends Component {
       return card;
     });
 
+    // resort entire array of cards
+    newCardReset.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+
     this.setState(
       {
         cardInfo: [...newCardReset],
@@ -63,11 +68,6 @@ class App extends Component {
         console.log("reset", this.state);
       }
     );
-
-    //shuffle the cards
-    newCardReset.sort(function(a, b) {
-      return 0.5 - Math.random();
-    });
   };
 
   //if you guess correctly (picking a card that has not yet been picked)
