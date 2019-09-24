@@ -24,6 +24,7 @@ The Clicky Game app is a simple memory game where the user tries to click each i
 - Card rendering is in the Game Card componet
 
 ## How to Use the App
+Play [The Clicky Game](https://kknape.github.io/clicky-game)!
 
 - Home page is displayed. Click an image to get started.
   - ![User Selects Prompt](https://github.com/kknape/clicky-game/blob/master/images/Start_Game.png)
